@@ -7,10 +7,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = "patients")
+@EqualsAndHashCode(exclude = "patients")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -29,6 +29,7 @@ public class PatientService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Không tìm thấy người dùng: " + username));
     }
 
+    @Transactional
     public void registerPatient(Patient patient) {
         if (patientRepository.existsByUsername(patient.getUsername())) {
             throw new RuntimeException("Username đã tồn tại");
@@ -48,6 +49,7 @@ public class PatientService implements UserDetailsService {
         roles.add(patientRole);
         patient.setRoles(roles);
 
-        patientRepository.save(patient);
+        patientRepository.saveAndFlush(patient);
+        System.out.println("Đã lưu bệnh nhân: " + patient.getUsername() + " vào database.");
     }
 }
